@@ -1,0 +1,105 @@
+import java.util.*;
+import javax.swing.JOptionPane;
+public class ShipCaptianCrew {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//invokes random object
+		Random r = new Random();
+		//declares dice array
+		int dice[] = {r.nextInt(6)+1, r.nextInt(6)+1, r.nextInt(6)+1, r.nextInt(6)+1, r.nextInt(6)+1};
+		boolean Ship = false;
+		boolean Captain = false;
+		boolean Crew = false;
+		int Shipy =0;
+		int Captainy =0;
+		int Crewy =0;
+		int rolls = 0; 
+		int i = 0;
+		//start game
+		Game:
+		while(rolls<3){
+			Shiploop:
+			for (i=0; i<=4; i++){
+				if(dice[i]==6){
+					//store Ship dice number
+					Shipy=i;
+					//ship is true
+					Ship = true;
+					//Check Captain
+					break Shiploop;
+				}
+					//you have rolls left. would you like to try again? Here are your dice
+				if (Ship==false && i==4){
+					int rerollOption1 = JOptionPane.showConfirmDialog(null,"Whoops! You need a ship! You have " + (2-rolls) + " rolls left.\n You Rolled "+dice[0-4] + "\nWould you like to reroll?","Reroll?", JOptionPane.YES_NO_OPTION);
+					if(rerollOption1 == JOptionPane.YES_OPTION){
+						dice[i]=r.nextInt(6)+1;
+						rolls +=1;
+						continue Shiploop;
+					}else{
+						break Game;
+					}
+				}
+			}
+		}
+		i=0;
+		Game:
+		while(rolls<3){
+			Captainloop:
+			for (i=0; i<4; i++){
+				if(dice[i]==5 && Ship==true){
+			//store dice [i] as Captain
+					Captainy=i;
+			//set Captain=true
+					Captain=true;
+			//remove Captain
+					break Captainloop;
+				}
+				if(i==4 && Captain==false){
+					int rerollOption1 = JOptionPane.showConfirmDialog(null,"Whoops! You need a Captain! You have " + (2-rolls) + " rolls left.\n" + "Would you like to reroll?","Reroll?", JOptionPane.YES_NO_OPTION);
+					if(rerollOption1 == JOptionPane.YES_OPTION){
+						dice[i]=r.nextInt(6)+1;
+						rolls +=1;
+						continue Captainloop;
+			//you have rolls left, would you like to try again? Here are your dice
+					}else{
+						break Game;
+					}
+				}
+			}
+		}
+		i=0;
+		Game:
+		while (rolls<3){
+			Crewloop:
+			for (i=0; i<4; i++){
+				if(dice[i]==4 && Ship==true && Captain==true){
+			//store dice[i] as Crew
+					Crewy=i;
+			//set Crew==true
+					Crew=true;
+			//remove Crew
+					break Crewloop;
+				}
+				if(i==4 && Crew==false){
+					int rerollOption1 = JOptionPane.showConfirmDialog(null,"Whoops! You need a crew! You have " + (2-rolls) + " rolls left.\n" + "Would you like to reroll?","Reroll?", JOptionPane.YES_NO_OPTION);
+					if(rerollOption1 == JOptionPane.YES_OPTION){
+						dice[i]=r.nextInt(6)+1;
+						rolls +=1;
+						continue Crewloop;
+			//you have rolls left, would you like to try again? Here are your dice
+					}else{
+						break Game;
+					}
+				}
+			}
+		}
+		//end of game
+		if (Ship==true && Captain==true && Crew==true){
+			JOptionPane.showMessageDialog(null,"Congratulations! You Win! Your score is " + (dice[0]+dice[1]+dice[2]+dice[3] + dice[4]-dice[Shipy]-dice[Captainy]-dice[Crewy]));
+		}else{
+			JOptionPane.showMessageDialog(null,  "Too Bad, You couldn't get the team together. Let's Play Again!");
+			}//ends rolls loop while
+		
+	}//ends main
+}//ends shipcaptaincrew 

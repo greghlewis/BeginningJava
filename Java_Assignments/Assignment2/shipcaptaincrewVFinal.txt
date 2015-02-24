@@ -1,0 +1,153 @@
+import java.util.*;
+import javax.swing.JOptionPane;
+public class ShipCaptianCrew {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//invokes random object
+		Random r = new Random();
+		int N = 5;
+		int[] dice;
+		dice = new int[N];
+		int rolls = 0;
+		int i = 0;
+		int[] numbers;
+		numbers = new int[N];
+		boolean Ship = false;
+		boolean Captain = false;
+		boolean Crew = false;
+		
+		
+		while (rolls<3)
+		{	
+			int score=0;
+			N = 5;
+			
+			//how many dice should be rolled?
+			if(Ship==true)
+			{
+				N -=1;
+			}
+			if(Captain==true)
+			{
+				N -=1;
+			}
+			if(Crew==true)
+			{
+				N -=1;
+			}
+			
+			//the beginning of each (re)roll
+			for(i=0; i<N; i++) //rolls N dice
+			{
+				dice[i]=r.nextInt(6)+1;
+			}
+			
+			rolls += 1; //increments rolls
+			
+			//zero out unrolled dice
+			
+			if(Ship==true)
+			{
+				numbers[4]=0;
+			}
+			
+			if(Captain==true)
+			{
+				numbers[3]=0;
+			}
+			
+			if(Crew==true)
+			{
+				numbers[2]=0;
+			}
+			
+			i=0; //reset counter
+			
+			//tally score
+			for(i=0;i<N; i++) //tallies score for N dice
+			{
+				score = score + dice[i];
+			}
+			
+			i=0; //reset counter
+			
+			//build dice array
+			for(i=0;i<N; i++)
+			{
+				numbers[i]=dice[i];
+			}
+			
+			i=0;//reset counter
+			
+			//loops through dice to check for Ship
+			for (i=0; i<=4; i++) //loop
+			{
+				if(dice[i]==6 && Ship==false) //checks for Ship
+				{
+					Ship = true;
+					score = score-6;
+					
+				}
+			}
+			
+			i=0;
+			
+			//loops through dice to check for Captain
+			for (i=0; i<=4; i++)//loop
+			{
+				if(dice[i]==5 && Ship==true && Captain==false)//checks for Captain
+				{
+					Captain=true;
+					score = score -5;
+				}
+			}
+			
+			i=0; //reset counter
+			
+			//loops through dice to check for Crew
+			for (i=0; i<=4; i++)//loop
+			{
+				if(dice[i]==4 && Ship==true && Captain==true && Crew==false)//check for Crew
+				{
+					Crew=true;
+					score =score-4;
+				}
+			}
+			
+			i=0; //reset counter	
+
+		//Output if you win
+		if(Ship==true && Captain==true && Crew==true)
+		{
+			if(rolls<3)
+			{
+			int reroll = JOptionPane.showConfirmDialog(null,"Congratulations! You brought the crew together.\n Your Score is: " + score + "\n You have " + (3-rolls) + " rolls left.\n Dice: " + Arrays.toString(numbers) + "\n Would you like to reroll?","Reroll?", JOptionPane.YES_NO_OPTION);
+				if(reroll == JOptionPane.NO_OPTION)
+				{
+					JOptionPane.showMessageDialog(null,"Congratulations! You Win! Your score is " + score + "\n Dice: "+ Arrays.toString(numbers));
+					rolls +=3;
+				}
+			}else{
+				JOptionPane.showMessageDialog(null,"Congratulations! You Win! Your score is " + score+ "\n Dice: "+ Arrays.toString(numbers));
+			}
+			
+		}//end win output
+		//Output if you lose
+		if(Crew==false)
+		{
+			if(rolls<3)
+			{
+			int reroll = JOptionPane.showConfirmDialog(null,"Too bad... Keep at it! You have " + (3-rolls) + " rolls left.\n" + "Would you like to reroll? \n Dice: " + Arrays.toString(numbers) ,"Reroll?", JOptionPane.YES_NO_OPTION);
+				if(reroll == JOptionPane.NO_OPTION)
+				{
+					JOptionPane.showMessageDialog(null,"Too bad... Maybe Next Time! \n Dice: " + Arrays.toString(numbers));
+					rolls +=3;
+				}
+			}else{
+				JOptionPane.showMessageDialog(null,"Too bad... Maybe Next Time! \n  Dice:" + Arrays.toString(numbers));
+			}
+		}//end lose output
+		}//end while
+	}//end main
+}//end ShipCaptainCrew
