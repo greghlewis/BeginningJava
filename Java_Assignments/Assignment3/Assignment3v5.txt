@@ -1,0 +1,184 @@
+import javax.swing.JOptionPane;
+
+
+
+public class Blackjack {
+
+	
+	static int dealCard(){
+		return (int)(Math.random()*11+1);
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 final class CardPlayer {
+			 int score = 0;
+			 int cardCount = 2;
+			  
+			 //Generate cardArray
+			 
+			 int[] cardArray = new int[21];
+			 
+			 //showHand: length of cardCount
+			 String showHand(int [] a)
+			 {
+				 StringBuffer strArray = new StringBuffer();
+				 String space = ", ";
+				 if (a.length>0)
+				 {
+					strArray.append(a[0]);
+					for (int i=1; i<cardCount; i++){
+						strArray.append(space).append(a[i]);
+					}
+				 }
+				 return (strArray.toString());
+			 }
+			 
+			 String slightofHand(int [] a)
+			 {
+				 String slight = Integer.toString(a[0]);
+				 return slight;
+			 }
+			 
+			 //addhand
+			 int addHand(int [] a)
+			 {
+				 int sum = 0;
+			 	for(int i=0;i<a.length; i++)
+			 	{
+			 		sum += a[i];
+			 	}
+			 	return sum;
+			 }
+		}//end cardPlayer class
+		 //beginning loop conditions
+		 
+		 boolean busted = false;
+		 boolean play_again = true;
+		 String user_input = " ";
+		  
+		  
+		 //loop initiation
+		 while (play_again == true){
+		 while (busted == false){
+		 
+		
+		 //initialize players
+		 
+		 CardPlayer dealer = new CardPlayer(); //generates default dealer
+		 CardPlayer user = new CardPlayer(); //generates default user 
+		 
+		 //ensures lack of bust, randomizes first two cards
+		 dealer.cardArray[0] = dealCard();
+		 dealer.cardArray[1] = dealCard();
+		 
+		 dealer.score=dealer.addHand(dealer.cardArray);
+		 while(dealer.score==22)
+		 {	 
+			 dealer.cardArray[0] = dealCard();
+			 dealer.cardArray[1] = dealCard();
+		 }
+		 
+		 user.cardArray[0] = dealCard();
+		 user.cardArray[1] = dealCard();
+		 
+		 user.score=user.addHand(user.cardArray);
+		 while(user.score==22)
+		 {
+			 user.cardArray[0] = dealCard();
+			 user.cardArray[1] = dealCard();
+		 }
+		  
+		 //start game
+		 
+		 
+		 JOptionPane.showMessageDialog(null,"Welcome to the Game! You may type STOP at any time to exit the game.");
+		 
+		 while(user.score<21){
+			 user_input = JOptionPane.showInputDialog(null,"Here are your cards: "+user.showHand(user.cardArray)+"\n HIT or STAY? \n Dealer's Card: "+ dealer.slightofHand(dealer.cardArray)).toUpperCase();
+			 	if (user_input.equals("HIT"))
+			 	{
+		  		user.cardArray[user.cardCount] = (int)(Math.random()*11)+1; //newcard
+		  		user.cardCount += 1;
+		  		user.score = user.addHand(user.cardArray);
+		  		}else if (user_input.equals("STAY")){
+		  			break;
+		  		}else if(user_input.equals("STOP")){
+		  			busted = true;
+		  			break;
+		 		}else{
+		  			JOptionPane.showMessageDialog(null,"Whoops! Thats a bad entry. Try again.");
+		  		}
+		 } //end user card pick loop
+		 if(busted==true){
+			 break;
+		 }
+		 
+		 if (user.score==21){
+			 JOptionPane.showMessageDialog(null, "You hit 21! Good Work! \n Here's your cards: "+user.showHand(user.cardArray));
+		 }
+		  
+		 if (user.score>21) //busted check
+		 	{
+		 	JOptionPane.showMessageDialog(null,"BUSTED. Here's your cards: \n"+ user.showHand(user.cardArray));
+		 	busted = true;
+		 	break;
+		 	}
+		 
+		 JOptionPane.showMessageDialog(null,"Here are the dealer's cards: "+ dealer.showHand(dealer.cardArray));
+		 if (busted == true){
+			 break;
+		 }
+		 //dealer takes his turn
+		 
+		 dealer.score = dealer.addHand(dealer.cardArray);
+		 while (dealer.score<17)
+		 	{
+		 	dealer.cardArray[dealer.cardCount] = dealCard(); //newcard
+		 	dealer.cardCount += 1;
+		 	JOptionPane.showMessageDialog(null,"Dealer Hits. \n Dealer's cards: " + dealer.showHand(dealer.cardArray));
+		 	dealer.score = dealer.addHand(dealer.cardArray);
+		  		
+		 	}
+		 
+		 if (dealer.score > 21)
+		 	{
+			 JOptionPane.showMessageDialog(null,"DEALER BUST. YOU WIN!");
+			 busted = true;
+		 	}
+		 //Did you win???
+		 if (dealer.score<22 && user.score<22)
+		 {
+			 JOptionPane.showMessageDialog(null, "Here's the results:" + "\n Dealer: "+ dealer.showHand(dealer.cardArray)+ "\n You: "+ user.showHand(user.cardArray));
+		 	if (user.score>dealer.score)
+		 	{
+		 		JOptionPane.showMessageDialog(null,"You Win! Good job!");
+		 		busted = true;
+		 	
+		 	}else if(user.score == dealer.score){
+		 		JOptionPane.showMessageDialog(null, "You tied! The Dealer wins");
+		 		busted = true;
+		 	}else{
+		 		JOptionPane.showMessageDialog(null,"The Dealer Wins");
+		 		busted = true;
+		 	}
+		  }
+		 } //end busted
+		  
+		 user_input = JOptionPane.showInputDialog("Would you like to play again? YES or NO").toUpperCase();
+		 if (user_input.equals("N") || user_input.equals("NO"))
+		 {
+		 	play_again = false;
+		 }else if (user_input.equals("Y") || user_input.equals("YES")){
+			 busted = false;
+		 }else if(user_input.equals("STOP")){
+			 play_again = false;
+		 }else{
+			 JOptionPane.showMessageDialog(null, "Whoops! Try again.");
+		 }
+		 }//end play_again 
+		  
+
+	}//main
+
+}//blackjack
+

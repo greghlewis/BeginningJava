@@ -1,0 +1,149 @@
+import java.util.*;
+import javax.swing.JOptionPane;
+
+/**
+public class Blackjack {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 * public static class CardPlayer {
+		 * int score = 0;
+		 * int cardCount = 0;
+		 * int[] cardArray = new int[21];
+		 * void newCard(int [] a, int cc){
+		 * 		int someCard = 0;
+		 * 		Random r = new Random();
+		 * 		someCard = r.nextInt(11)+1;
+		 * 		a[cc] = someCard;
+		 * 		cc += 1;
+		 * }
+		 * int addHand(int [] a, int cc){
+		 * 		for(i=0,i<cc, i++){
+		 * 			sum += a[i];
+		 * 			return sum;
+		 * }
+		 * }
+		 * 
+		 * void showHand(int [] a, int cc){
+		 * 		for(i=0, i<cc, i++){
+		 * 		System.out.println(a[i]);
+		 * }
+		 * }
+		 * 
+		 * void newStart(int [] a, int cc, ps){
+		 * 		ps = 0;
+		 * 		a[0] = randInt(11)+1;
+		 * 		a[1] = randInt(11)+1;
+		 * 		cc = 2;
+		 * 
+		 * }
+		 * }//end cardPlayer
+		 * 
+		 * 
+		 * ---beginning loop conditions ---
+		 * 
+		 * boolean busted = False;
+		 * boolean play_again = True;
+		 * Str user_input = " "
+		 * 
+		 * 
+		 * ---loop initiation---
+		 * 
+		 * if user_input == "STOP"{
+		 * 		busted = true;
+		 * 
+		 * while play_again == true{
+		 * while busted == false{
+		 * 
+		 * ---dealer set up---
+		 * 
+		 * CardPlayer dealer = new CardPlayer();//fresh dealer user
+		 * 	
+		 * dealer.newStart(cardArray[], dealer.cardCount, dealer.score);
+		 * dealer.score=addHand(dealer.cardArray[], dealer.cardCount);
+		 * 
+		 * while(dealer.score==22){ //correct for pregame bust
+		 * 		newStart(dealer.cardArray[], dealer.cardCount);
+		 * }
+		 * 
+		 * ---user sets up---
+		 * 
+		 * CardPlayer user = new CardPlayer(); //generates fresh user 
+		 * 
+		 * user.newStart(user.cardArray[], user.cardCount, user.score);
+		 * user.score=addHand(user.cardArray[], user.cardCount);
+		 * 
+		 * while(user.score==22){ ///correct for pregame bust
+		 * 		newStart(user.cardArray[], cardCount);
+		 * }
+		 * 
+		 * ---start game---
+		 * 
+		 * 
+		 * prompt: "Welcome to the Game! You may type "STOP" at any time to exit the game."
+		 * 
+		 * while(user.score<21){
+		 * Str upper(user_input) = prompt "Here are you cards: "+showHand()+"\n HIT or STAY?"
+		 * 	if (user_input == "HIT")
+		 * 	{
+		 * 		user.newCard(user.cardArray[], user.cardCount);
+		 * 		user.score = addHand(user.cardArray[], user.cardCount)
+		 * 	}elif (user_input == "STAY"){
+		 *  	break
+		 *  }else{
+		 *  	display: Whoops! That's a bad entry. Try again.
+		 *  }
+		 * 
+		 * }//end user card pick loop
+		 * 
+		 * 
+		 * if (user.score>21) //busted check
+		 * 	{
+		 * 		prompt "BUSTED";
+		 * 		busted = True;
+		 * }
+		 * 
+		 * prompt: "here are the dealer's cards"+ dealer.showHand(dealer.cardArray[], dealer.cardCount);
+		 * 
+		 * ---dealer takes his turn---
+		 * 
+		 * while (dealer.score<17)
+		 * {
+		 * 		dealer.newCard(dealer.cardArray[], dealer.cardCount);
+		 *		dealer.showHand(dealer.cardArray[], dealer.cardCount);
+		 * 		dealer.score = addHand(dealer.cardArray[], dealer.cardCount);
+		 * 		
+		 * }
+		 * 
+		 * if dealer.score > 21
+		 * {
+		 * 		prompt "DEALER BUST";
+		 * 		busted = True;
+		 * }
+		 * } //end busted
+		 * ---Did you win???---
+		 * 
+		 * if (dealer.score<22 && user.score<22)
+		 * {
+		 * 		if user.score>dealer.score
+		 * 		{
+		 * 			prompt "you win good job!"
+		 * 		}else{
+		 * 			prompt "the dealer wins"
+		 * 		}
+		 * }
+		 * 
+		 * 
+		 * upper(user_input) = prompt: "Would you like to play again? YES or NO"
+		 * 		if (user_input = "N" || user_input = "NO"){
+		 * 			play_again = false;
+		 * 		}
+		 * }//end play_again
+		 * 
+		 * }//endif user_input "Stop"
+		 * 
+
+	}//main
+
+}//blackjack
+*/
